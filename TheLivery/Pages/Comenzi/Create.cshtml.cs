@@ -72,6 +72,7 @@ namespace TheLivery.Pages.Comenzi
         }
 
         public Colet Colet { get; set; }
+        public string Message { get;set;}
 
         public void OnPost()
         {
@@ -90,6 +91,8 @@ namespace TheLivery.Pages.Comenzi
                 Comanda = _context.Comenzi
                 .Include(c => c.Colet)
                 .Include(c => c.Curier).FirstOrDefault(m => m.ID.Equals(int.Parse(Request.Form["idComanda"])));
+                Comanda.Stare = "LIVRAT";
+                _context.Attach(Comanda).State = EntityState.Modified;
             }
             else
             {
